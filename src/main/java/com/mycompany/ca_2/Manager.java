@@ -8,6 +8,8 @@ package com.mycompany.ca_2;
  *
  * @author wanghuohuo
  */
+
+// Manager class: stores the type of manager
 public class Manager {
     
     private String type;
