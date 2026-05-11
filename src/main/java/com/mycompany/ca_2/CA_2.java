@@ -4,8 +4,10 @@
 
 package com.mycompany.ca_2;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,31 +70,44 @@ public class CA_2 {
         }
     }
     
-     // Load data from text file
     
-    private static void loadFile(String fileName) {
-        try {
-            File file = new File(fileName);
-            Scanner sc = new Scanner(file);
-            if (sc.hasNextLine()) sc.nextLine();
+    // Load file using BufferedReader
+    
+private static void loadFile(String fileName) {
+    //  Clear the list to avoid duplicate data
+    employeeList.clear();
 
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                String[] parts = line.split(",");
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        // Skip the header line(column names)
+        br.readLine();
 
-                String fname = parts[0];
-                String lname = parts[1];
-                String dept = parts[5];
-                String mgr = parts.length > 6 ? parts[6] : "Staff";
+        // Read each line of the file until the end
+        while ((line = br.readLine()) != null) {
+            // Remove leading/trailing whitespace
+            line = line.trim();
+            
+            //Skip empty lines to avoid errors
+            if (line.isEmpty()) continue;
 
+            // Split the line into parts using comma as the separator
+            String[] parts = line.split(",");
+
+            // Only process lines that have at least 6 fields
+            if (parts.length >= 6) {
+                String fname = parts[0].trim();
+                String lname = parts[1].trim();
+                String dept = parts[5].trim();
+                String mgr = (parts.length > 6) ? parts[6].trim() : "Staff";
+               // Add the new employee to the list
                 employeeList.add(new Employee(fname, lname, dept, mgr));
             }
-            System.out.println("Loaded: " + employeeList.size() + " employees.");
-            sc.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
         }
+        System.out.println("Loaded: " + employeeList.size() + " employees");
+    } catch (IOException e) {
+        System.out.println("Cannot read file");
     }
+}
 
     // Merge Sort (recursive)
    
