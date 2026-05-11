@@ -9,5 +9,18 @@ package com.mycompany.ca_2;
  * @author wanghuohuo
  */
 public class Department {
+    private String name;
+
+    // Constructor: create a department with a name
+    
+    public Department(String name) {
+        this.name = name;
+    }
+
+    // Get the department name
+    
+    public String getName() {
+        return name;
+    }
     
 }
