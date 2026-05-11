@@ -10,4 +10,18 @@ package com.mycompany.ca_2;
  */
 public class Manager {
     
+    private String type;
+
+    // Constructor: create a manager type
+  
+    public Manager(String type) {
+        this.type = type;
+    }
+
+    // Get manager type
+   
+    public String getType() {
+        return type;
+    }
+    
 }
