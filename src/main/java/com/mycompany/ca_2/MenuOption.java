@@ -8,6 +8,11 @@ package com.mycompany.ca_2;
  *
  * @author wanghuohuo
  */
-public class MenuOption {
-    
+public enum MenuOption {
+   
+    SORT,
+    SEARCH,
+    ADD_EMPLOYEE,
+    BUILD_TREE,
+    EXIT
 }
